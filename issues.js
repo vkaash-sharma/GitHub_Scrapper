@@ -1,6 +1,7 @@
 const request = require("request");
 const cheerio = require("cheerio");
 const fs = require("fs");
+const pdfkit = require("pdfkit");
 const path =  require("path");
 
 function getIssuesPageHtml(url , topic , repoName) {
@@ -34,8 +35,13 @@ function getIssuesPageHtml(url , topic , repoName) {
       let folderPath = path.join(__dirname , topic);
       dirCreater(folderPath);
 
-      let filePath = path.join(folderPath , repoName+".json");
-      fs.writeFileSync(filePath , JSON.stringify(arr));
+      let filePath = path.join(folderPath , repoName+".pdf");
+      let text = JSON.stringify(arr);
+      let pdfDoc = new pdfkit();
+      pdfDoc.pipe(fs.createWriteStream(filePath));
+      pdfDoc.text(text);
+      pdfDoc.end();
+    //   fs.writeFileSync(filePath , );
 
   }
 
