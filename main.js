@@ -22,10 +22,11 @@ function getTopicsLinks(html){
     for(let i = 0 ; i < linkElemArr.length ; i++){
           let href =  $(linkElemArr[i]).attr("href");
         //   console.log(href);
-
+      
+        let topic  = href.split("/").pop()
         let fullLink = `https://github.com${href}`;
 
-        getReposePageHtml(fullLink);
+        getReposePageHtml(fullLink , topic);
     }
 
 }
