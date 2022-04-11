@@ -10,6 +10,9 @@ function getReposePageHtml(url , topic) {
       if(err){
           console.log(err);
       }
+      else if(response.statusCode == 404){
+        console.log("Page Not Found");
+    }
       else{
           getReposeLink(html);
         // console.log(html);
@@ -26,10 +29,11 @@ function getReposePageHtml(url , topic) {
    
          let twoAnchors = $(headingsArr[i]).find("a");
           
-           let link = $(twoAnchors[0]).attr("href");
+           let link = $(twoAnchors[1]).attr("href");
           
            let fullLink  =  `https://github.com${link}/issues`;
-
+              
+            console.log(fullLink)
            getIssuesHtml(fullLink , topic);
           
 
