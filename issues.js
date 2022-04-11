@@ -1,7 +1,9 @@
 const request = require("request");
 const cheerio = require("cheerio");
+const fs = require("fs");
+const path =  require("path");
 
-function getIssuesPageHtml(url , topic) {
+function getIssuesPageHtml(url , topic , repoName) {
 
     request(url , cb);
 
@@ -29,6 +31,11 @@ function getIssuesPageHtml(url , topic) {
         //   console.log(link);
           arr.push(link);
       }
+      let folderPath = path.join(__dirname , topic);
+      dirCreater(folderPath);
+
+      let filePath = path.join(folderPath , repoName+".json");
+      fs.writeFileSync(filePath , JSON.stringify(arr));
 
   }
 
@@ -36,8 +43,18 @@ function getIssuesPageHtml(url , topic) {
 
 
 }
-
-
-
-
 module.exports = getIssuesPageHtml;
+
+function dirCreater(folderPath){
+
+    if(fs.existsSync(folderPath) == false){
+        fs.mkdirSync(folderPath);
+    }
+}
+
+
+
+
+
+
+

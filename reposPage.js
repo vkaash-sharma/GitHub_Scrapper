@@ -1,5 +1,6 @@
 const request = require("request");
 const cheerio = require("cheerio");
+const pdfkit = require("pdfkit");
 const getIssuesHtml = require("./issues");
 
 function getReposePageHtml(url , topic) {
@@ -33,8 +34,9 @@ function getReposePageHtml(url , topic) {
           
            let fullLink  =  `https://github.com${link}/issues`;
               
-            console.log(fullLink)
-           getIssuesHtml(fullLink , topic);
+            // console.log(fullLink)
+            let repoName = link.split("/").pop();
+           getIssuesHtml(fullLink , topic , repoName);
           
 
       }

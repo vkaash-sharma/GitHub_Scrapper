@@ -27,7 +27,7 @@ function getTopicsLinks(html){
           let href =  $(linkElemArr[i]).attr("href");
         //   console.log(href);
       
-        let topic  = href.split("/").pop()
+        let topic  = href.split("/").pop();
         let fullLink = `https://github.com${href}`;
 
         getReposePageHtml(fullLink , topic);
